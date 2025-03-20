@@ -14,7 +14,7 @@ const RootLayout = async ({ children }: Readonly<IProps>) => {
     <ClerkProvider>
       <NextIntlClientProvider>
         <html lang={locale}>
-          <body className="min-h-screen h-screen flex flex-col overflow-hidden">{children}</body>
+          <body className="min-h-screen h-screen flex flex-col">{children}</body>
         </html>
       </NextIntlClientProvider>
     </ClerkProvider>

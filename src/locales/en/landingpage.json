@@ -3,5 +3,17 @@
   "subtitle1": "Yout interactive document companion",
   "subtitle2": "Introducing Chat with PDFs.",
   "description": "Upload your document, and our chatbot will answer questions, summarize content, and answer all your Qs. Ideal for everyone, Chat with PDF turns static documents into dynamic conversations, enhancing productivity 10x fold effortlessly. ",
-  "cta": "Get Started"
+  "cta": "Get Started",
+  "title-feature1": "Document Storage",
+  "description-feature1": "Securely store and organize all your PDF documents in one convenient location. Access your files anytime with our robust storage solution.",
+  "title-feature2": "Lightning-Fast Responses",
+  "description-feature2": "Experience minimal latency with our optimized system that delivers instant feedback and rapid processing of all your document requests.",
+  "title-feature3": "Conversation Memory",
+  "description-feature3": "Never lose context with our intelligent chat system that remembers your previous interactions and maintains continuity across sessions.",
+  "title-feature4": "Interactive PDF Viewing",
+  "description-feature4": "Engage with your documents through our dynamic PDF interface that allows highlighting, commenting, and real-time collaboration.",
+  "title-feature5": "Automatic Cloud Backup",
+  "description-feature5": "Rest easy knowing your important documents are continuously backed up to the cloud, protected against data loss and accessible across devices.",
+  "title-feature6": "Cross-Device Compatibility",
+  "description-feature6": "Seamlessly transition between desktop, tablet, and mobile with our responsive design that adapts perfectly to any screen size."
 }
