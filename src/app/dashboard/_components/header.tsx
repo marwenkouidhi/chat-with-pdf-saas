@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-import { FilePlus2Icon, FileUpIcon } from "lucide-react";
+import { FilePlus2Icon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 

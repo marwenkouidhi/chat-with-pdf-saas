@@ -8,7 +8,7 @@ const DocumentUploader = () => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     console.table(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps, isDragActive, isFocused } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div className="">
@@ -28,7 +28,7 @@ const DocumentUploader = () => {
           ) : (
             <>
               <CircleArrowDownIcon className="animate-bounce" size={50} />
-              <div>Drag 'n' drop some files here, or click to select files</div>
+              <div>{`Drag 'n' drop some files here, or click to select files`}</div>
             </>
           )}
         </div>
