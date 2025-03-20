@@ -46,6 +46,7 @@ export default function Home() {
       icon: MonitorIcon,
     },
   ];
+
   return (
     <main className="p-2 lg:p-5 flex-1 bg-gradient-to-bl from-white to-indigo-600">
       <div className="p-24 lg:p-32 bg-white rounded-md drop-shadow-lg h-full space-y-16">
