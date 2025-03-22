@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }: Readonly<IProps>) => {
     <ClerkLoaded>
       <div className="flex-1 flex flex-col">
         <Header />
-        <main className="flex-1 bg-gray-50 p-5">{children}</main>
+        <main className="flex-1 bg-gray-50">{children}</main>
       </div>
     </ClerkLoaded>
   );
