@@ -30,7 +30,7 @@ const DocumentViewer = ({ url }: IProps) => {
   } = useDocumentViewer(url);
 
   return (
-    <div className="text-xs space-y-5">
+    <div className="h-full text-xs space-y-5 flex flex-col">
       <div className="max-w-4xl mx-auto p-3 sticky top-0 z-50 bg-gray-100 rounded-b-md shadow-sm flex justify-center space-x-5 md:space-x-10">
         <div className="flex items-center space-x-3">
           <Button
@@ -90,7 +90,11 @@ const DocumentViewer = ({ url }: IProps) => {
       </div>
 
       {/* PDF VIEWER */}
-      <div className="max-w-3xl mx-auto overflow-auto">
+      <div
+        className={`max-w-3xl mx-auto w-full overflow-auto flex-1 flex justify-center items-center ${
+          !file ? "bg-gray-200" : "bg-gray-100"
+        }`}
+      >
         {!file ? (
           <LoaderCircleIcon className="animate-spin h-16 w-16 text-indigo-600" />
         ) : (

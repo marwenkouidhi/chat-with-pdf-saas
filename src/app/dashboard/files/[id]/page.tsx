@@ -1,3 +1,4 @@
+import DocumentChatBox from "@/features/documents/document-chat-box/document-chat-box";
 import DocumentViewer from "@/features/documents/document-viewer/document-viewer";
 import { storage } from "@/lib/db/appwrite";
 
@@ -16,7 +17,9 @@ const FilePage = async ({ params }: IProps) => {
         <DocumentViewer url={url} />
       </div>
 
-      <div className="col-span-1 lg:col-span-2 border-l-4 border-l-indigo-600"></div>
+      <div className="col-span-1 lg:col-span-2 border-l-4 border-l-indigo-600">
+        <DocumentChatBox />
+      </div>
     </div>
   );
 };

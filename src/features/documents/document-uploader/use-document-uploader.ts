@@ -25,7 +25,6 @@ const useDocumentUploader = () => {
   const uploadFile = async (file: File) => {
     if (!file || !user || !user.user) return;
 
-    const fileId = uuidv4();
     const userId = user.user.id;
 
     setState({
@@ -36,7 +35,7 @@ const useDocumentUploader = () => {
     try {
       const createFileResponse = await storage.createFile(
         "67debc0f000664c5657e",
-        fileId,
+        ID.unique(),
         file,
         [],
         (progress) => {
@@ -65,7 +64,7 @@ const useDocumentUploader = () => {
         ID.unique(),
         {
           userId,
-          fileId,
+          fileId: createFileResponse.$id,
         }
       );
     } catch (error) {
