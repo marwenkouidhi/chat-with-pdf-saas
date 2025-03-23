@@ -90,19 +90,23 @@ const useDocumentViewer = (url: string) => {
     setFile,
   } = useDocumentViewerController();
 
-  useEffect(() => {
-    const fetchFile = async () => {
-      try {
-        const response = await fetch(url);
-        const file = await response.blob();
-        setFile(file);
-      } catch (error) {
-        console.error("Error downloading the file:", error);
-      }
-    };
+  useEffect(
+    () => {
+      const fetchFile = async () => {
+        try {
+          const response = await fetch(url);
+          const file = await response.blob();
+          setFile(file);
+        } catch (error) {
+          console.error("Error downloading the file:", error);
+        }
+      };
 
-    fetchFile();
-  }, [url, setFile]);
+      fetchFile();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   return {
     ...state,
