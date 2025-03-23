@@ -6,7 +6,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="flex justify-between shadow-sm p-5 border-b">
+    <div className="shadow-sm border-b flex justify-between items-center h-[5rem] px-5">
       <Link href="/dashboard" className="text-2xl">
         Chat to <span className="text-indigo-600">PDF</span>
       </Link>
