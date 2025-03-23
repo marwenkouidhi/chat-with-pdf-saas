@@ -104,7 +104,7 @@ const DocumentViewer = ({ url }: IProps) => {
             rotate={rotation}
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            <Page scale={scale} pageNumber={pageNumber} />
+            {pageNumber && <Page scale={scale} pageNumber={pageNumber} />}
           </Document>
         )}
       </div>

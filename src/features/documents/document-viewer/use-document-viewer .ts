@@ -10,7 +10,7 @@ interface StateType {
   scale: number;
 }
 
-const useDocumentViewer = (url: string) => {
+const useDocumentViewerController = () => {
   const [state, setState] = useState<StateType>({
     numPages: null,
     pageNumber: 1,
@@ -19,9 +19,8 @@ const useDocumentViewer = (url: string) => {
     scale: 1,
   });
 
-  const goToPage = (pageNumber: number) => {
-    if (!state.numPages || pageNumber < 1 || pageNumber > state.numPages) return;
-    setState((prev) => ({ ...prev, pageNumber }));
+  const setFile = (file: Blob) => {
+    setState((prev) => ({ ...prev, file }));
   };
 
   const nextPage = () => {
@@ -58,26 +57,52 @@ const useDocumentViewer = (url: string) => {
     setState((prev) => ({ ...prev, rotation: 0, scale: 1 }));
   };
 
-  useEffect(() => {
-    const fetchFile = async () => {
-      try {
-        const response = await fetch(url);
-        const file = await response.blob();
-        setState((prev) => ({ ...prev, file }));
-      } catch (error) {
-        console.error("Error downloading the file:", error);
-      }
-    };
-
-    fetchFile();
-  }, [url]);
-
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => {
     setState((prve) => ({
       ...prve,
       numPages,
     }));
   };
+
+  return {
+    state,
+    onDocumentLoadSuccess,
+    prevPage,
+    nextPage,
+    zoomIn,
+    zoomOut,
+    rotate,
+    resetView,
+    setFile,
+  };
+};
+
+const useDocumentViewer = (url: string) => {
+  const {
+    state,
+    onDocumentLoadSuccess,
+    prevPage,
+    nextPage,
+    zoomIn,
+    zoomOut,
+    rotate,
+    resetView,
+    setFile,
+  } = useDocumentViewerController();
+
+  useEffect(() => {
+    const fetchFile = async () => {
+      try {
+        const response = await fetch(url);
+        const file = await response.blob();
+        setFile(file);
+      } catch (error) {
+        console.error("Error downloading the file:", error);
+      }
+    };
+
+    fetchFile();
+  }, [url, setFile]);
 
   return {
     ...state,

@@ -24,6 +24,7 @@ const DocumentUploader = () => {
     SAVING: <SaveIcon className="h-20 w-20 text-indigo-600 animate-pulse" />,
     GENERATING: <HammerIcon className="h-20 w-20 text-indigo-600 animate-pulse" />,
   };
+
   const statusText = {
     UPLOADING: "Uploading file . . .",
     UPLOADED: "File uploaded successfully.",

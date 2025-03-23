@@ -5,7 +5,6 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { v4 as uuidv4 } from "uuid";
 
 export type STATUS = "IDLE" | "UPLOADING" | "UPLOADED" | "SAVING" | "GENERATING";
 
@@ -22,62 +21,53 @@ const useDocumentUploader = () => {
     status: "IDLE",
   });
 
-  const uploadFile = async (file: File) => {
-    if (!file || !user || !user.user) return;
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const uploadFile = async (file: File) => {
+        if (!file || !user || !user.user) return;
 
-    const userId = user.user.id;
+        const userId = user.user.id;
 
-    setState({
-      fileId: null,
-      status: "UPLOADING",
-    });
+        setState({
+          fileId: null,
+          status: "UPLOADING",
+        });
 
-    try {
-      const createFileResponse = await storage.createFile(
-        "67debc0f000664c5657e",
-        ID.unique(),
-        file,
-        [],
-        (progress) => {
-          console.log(progress);
+        try {
+          const createFileResponse = await storage.createFile(
+            "67debc0f000664c5657e",
+            ID.unique(),
+            file,
+            []
+          );
+
           setState((prev) => ({
             ...prev,
-            progress: progress.progress,
+            fileId: createFileResponse.$id,
+            status: "UPLOADED",
           }));
+
+          setState((prev) => ({
+            ...prev,
+            status: "SAVING",
+          }));
+
+          await db.createDocument("67dc9b85001d13d6d920", "67dc9b980022e0e18139", ID.unique(), {
+            userId,
+            fileId: createFileResponse.$id,
+          });
+        } catch {
+          setState({
+            fileId: null,
+            status: "IDLE",
+          });
         }
-      );
+      };
 
-      setState((prev) => ({
-        ...prev,
-        fileId: createFileResponse.$id,
-        status: "UPLOADED",
-      }));
-
-      setState((prev) => ({
-        ...prev,
-        status: "SAVING",
-      }));
-
-      const createDocumentResponse = await db.createDocument(
-        "67dc9b85001d13d6d920",
-        "67dc9b980022e0e18139",
-        ID.unique(),
-        {
-          userId,
-          fileId: createFileResponse.$id,
-        }
-      );
-    } catch (error) {
-      setState({
-        fileId: null,
-        status: "IDLE",
-      });
-    }
-  };
-
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    uploadFile(acceptedFiles[0]);
-  }, []);
+      uploadFile(acceptedFiles[0]);
+    },
+    [user]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

@@ -1,16 +1,16 @@
 import DocumentChatBox from "@/features/documents/document-chat-box/document-chat-box";
 import DocumentViewer from "@/features/documents/document-viewer/document-viewer";
 import { storage } from "@/lib/db/appwrite";
-
 interface IProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const FilePage = async ({ params }: IProps) => {
   const { id } = await params;
   const url = storage.getFileView("67debc0f000664c5657e", id);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 h-full">
       <div className="col-span-1 lg:col-span-3 bg-gray-100">
